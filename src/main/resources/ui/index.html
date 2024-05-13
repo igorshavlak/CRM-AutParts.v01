@@ -1,0 +1,867 @@
+<head xmlns="http://www.w3.org/1999/html">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">New part</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="col-form-label">Producer:</label>
+                        <select class="form-select" id="producer">
+
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="col-form-label">Price:</label>
+                        <input type="number" class="form-control" id="price">
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="col-form-label">Purchase price:</label>
+                        <input type="number" class="form-control" id="purchase_price">
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="col-form-label">Category:</label>
+                        <select class="form-select" id="category">
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="storage" class="col-form-label">Storage:</label>
+                        <select class="form-select" id="storage">
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="count" class="col-form-label">Count:</label>
+                        <input type="number" class="form-control" id="count">
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="col-form-label">Image:</label>
+                        <input type="file" class="form-control" id="image">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="add-part-button">Add part</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="updateModalLabel">Update part</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="name-update">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="description-update"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="col-form-label">Producer:</label>
+                        <select class="form-select" id="producer-update">
+
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="col-form-label">Price:</label>
+                        <input type="number" class="form-control" id="price-update">
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="col-form-label">Purchase price:</label>
+                        <input type="number" class="form-control" id="purchase_price-update">
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="col-form-label">Category:</label>
+                        <select class="form-select" id="category-update">
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="storage" class="col-form-label">Storage:</label>
+                        <select class="form-select" id="storage-update">
+
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="count" class="col-form-label">Count:</label>
+                        <input type="number" class="form-control" id="count-update">
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="col-form-label">Image:</label>
+                        <input type="file" class="form-control" id="image-update">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="delete-part-button"
+                        id="delete-part-button">Delete part
+                </button>
+                <button type="button" class="btn btn-primary" id="update-part-button">Update part</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="app container-custom">
+    <div class="sidebar">
+        <div class="app-icon">
+            <div class="logo">
+                <img src="images/logo.jpg" alt="Company Logo">
+                <h1>Auto parts</h1>
+            </div>
+        </div>
+        <ul class="sidebar-list">
+            <li class="sidebar-list-item active">
+                <a href="index.html">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                    <span>Parts</span>
+                </a>
+            </li>
+            <li class="sidebar-list-item">
+                <a href="statistic.html">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart">
+                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
+                        <path d="M22 12A10 10 0 0 0 12 2v10z"/>
+                    </svg>
+                    <span>Statistics</span>
+                </a>
+            </li>
+            <li class="sidebar-list-item ">
+                <a href="clients.html">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                        <path d="M12 2c2.21 0 4 2.24 4 5s-1.79 5-4 5-4-2.24-4-5 1.79-5 4-5zm0 10c2.67 0 8 1.34 8 4v2H4v-2c0-2.66 5.33-4 8-4z"/>
+                    </svg>
+                    <span>Clients</span>
+                </a>
+            </li>
+
+            <li class="sidebar-list-item">
+                <a href="orders.html">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="5.5" cy="7.5" r="1.5"></circle>
+                        <circle cx="5.5" cy="12" r="1.5"></circle>
+                        <circle cx="5.5" cy="16.5" r="1.5"></circle>
+                    </svg>
+                    <span>Orders</span>
+                </a>
+            </li>
+        </ul>
+        <div class="account-info">
+            <div class="account-info-picture">
+
+                <div class="status-dot"></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="app-content">
+        <div class="app-content-header">
+            <h1 class="app-content-headerText">Auto parts</h1>
+            <button class="mode-switch" title="Switch Theme">
+                <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                     stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
+                    <defs></defs>
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                </svg>
+            </button>
+            <button class="app-content-headerButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add part
+
+            </button>
+
+        </div>
+        <div class="app-content-actions">
+            <input class="search-bar" placeholder="Search..." type="text" id="search-input">
+            <div class="app-content-actions-wrapper">
+                <div class="filter-button-wrapper">
+                    <button class="action-button filter jsFilter"><span>Filter</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="feather feather-filter">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+                        </svg>
+                    </button>
+                    <div class="filter-menu">
+                        <label>Category</label>
+                        <select id="category-filter">
+                            <option>All</option>
+                        </select>
+                        <label>Producer</label>
+                        <select id="producer-filter">
+                            <option>All</option>
+                        </select>
+                        <label>Status</label>
+                        <select>
+                            <option>All</option>
+                            <option>Active</option>
+                            <option>Disabled</option>
+                        </select>
+                        <label>Store house</label>
+                        <select id="store-house-filter">
+                            <option>All</option>
+
+                        </select>
+                        <label>Price Range</label>
+
+                        <input type="number" placeholder="Min Price" id="minPrice">
+                        <input type="number" placeholder="Max Price" id="maxPrice">
+
+                        <div class="filter-menu-buttons">
+                            <button class="filter-button reset" id="reset-button">
+                                Reset
+                            </button>
+                            <button class="filter-button apply" id="filter-button">
+                                Apply
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="action-button list active" title="List View">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-list">
+                        <line x1="8" y1="6" x2="21" y2="6"/>
+                        <line x1="8" y1="12" x2="21" y2="12"/>
+                        <line x1="8" y1="18" x2="21" y2="18"/>
+                        <line x1="3" y1="6" x2="3.01" y2="6"/>
+                        <line x1="3" y1="12" x2="3.01" y2="12"/>
+                        <line x1="3" y1="18" x2="3.01" y2="18"/>
+                    </svg>
+                </button>
+                <button class="action-button grid" title="Grid View">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="products-area-wrapper tableView">
+            <div class="products-header">
+                <div class="product-cell image">
+                    Auto parts
+                    <button class="sort-button" id="sort-name">
+                        <svg width="16" height="16" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="product-cell category">Category
+                    <button class="sort-button" id="sort-category">
+                        <svg width="16" height="16" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="product-cell category">Producer
+                    <button class="sort-button" id="sort-producer">
+                        <svg width="16" height="16" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="product-cell status-cell">Status
+                    <button class="sort-button" id="sort-status">
+                        <svg width="16" height="16" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="product-cell sales">Sales
+                    <button class="sort-button" id="sort-sales">
+                        <svg width="16" height="16" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="product-cell stock">Count
+                    <button class="sort-button" id="sort-count">
+                        <svg width="16" height="16" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="product-cell price">Price
+                    <button class="sort-button" id="sort-price">
+                        <svg width="16" height="16" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="product-cell price">Retail price
+                    <button class="sort-button" id="sort-retail-price">
+                        <svg width="16" height="16" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+            <div id="products">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+
+
+    let partsList;
+
+
+    function filterProductsByName(searchTerm) {
+        return partsList.filter(product => product.part_name.toLowerCase().includes(searchTerm.toLowerCase()));
+    }
+    document.getElementById("search-input").addEventListener("input", function (event) {
+        const searchTerm = event.target.value.trim();
+        const filteredProducts = filterProductsByName(searchTerm);
+        displayAutoParts(filteredProducts);
+    });
+
+
+    function sortProducts(field) {
+        const sortOrder = field.startsWith('desc') ? -1 : 1;
+        const fieldName = field.replace('desc-', '');
+
+        return function (a, b) {
+            let valueA = a[fieldName];
+            let valueB = b[fieldName];
+
+            // If the field is numeric, convert values to numbers for comparison
+            if (!isNaN(valueA) && !isNaN(valueB)) {
+                valueA = parseFloat(valueA);
+                valueB = parseFloat(valueB);
+            }
+
+            if (valueA < valueB) {
+                return -1 * sortOrder;
+            }
+            if (valueA > valueB) {
+                return 1 * sortOrder;
+            }
+            return 0;
+        };
+    }
+
+    document.getElementById("sort-retail-price").addEventListener("click", async function () {
+
+        const sortedProducts = partsList.slice().sort(sortProducts('part_price'));
+        displayAutoParts(sortedProducts);
+    });
+    document.getElementById("sort-category").addEventListener("click", async function () {
+
+        const sortedProducts = partsList.slice().sort(sortProducts('category'));
+        displayAutoParts(sortedProducts);
+    });
+    document.getElementById("sort-name").addEventListener("click", async function () {
+
+        const sortedProducts = partsList.slice().sort(sortProducts('part_name'));
+        displayAutoParts(sortedProducts);
+    });
+    document.getElementById("sort-count").addEventListener("click", async function () {
+
+        const sortedProducts = partsList.slice().sort(sortProducts('count'));
+        displayAutoParts(sortedProducts);
+    });
+    document.getElementById("sort-producer").addEventListener("click", async function () {
+        const sortedProducts = partsList.slice().sort(sortProducts('part_producer'));
+        displayAutoParts(sortedProducts);
+    });
+    document.getElementById("sort-sales").addEventListener("click", async function () {
+        const sortedProducts = partsList.slice().sort(sortProducts('sales'));
+        displayAutoParts(sortedProducts);
+    });
+    document.getElementById("sort-price").addEventListener("click", async function () {
+        const sortedProducts = partsList.slice().sort(sortProducts('part_price'));
+        displayAutoParts(sortedProducts);
+    });
+
+
+    const productsContainer = document.getElementById('products');
+    const addProductButton = document.getElementById('add-part-button');
+    const updatePartButton = document.getElementById('update-part-button');
+    const deletePartButton = document.getElementById('delete-part-button');
+    let productId;
+    const selectElementProducer = document.getElementById('producer');
+    const selectElementSoreHouse = document.getElementById('storage');
+    const selectElementCategory = document.getElementById('category');
+    const selectElementProducerUpdate = document.getElementById('producer-update');
+    const selectElementSoreHouseUpdate = document.getElementById('storage-update');
+    const selectElementCategoryUpdate = document.getElementById('category-update')
+    const getFilteredButton = document.getElementById('filter-button');
+    const getResetButton = document.getElementById('reset-button');
+
+
+    function getAllCategories() {
+        fetch('http://localhost:8080/category/getAllCategoriesNames', {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+
+                data.forEach(producer => {
+                    const optionElement = document.createElement("option");
+                    optionElement.value = producer;
+                    optionElement.textContent = producer;
+                    selectElementCategory.appendChild(optionElement);
+
+                    const optionElementFilter = document.createElement("option");
+                    optionElementFilter.value = producer;
+                    optionElementFilter.textContent = producer;
+                    document.getElementById("category-filter").appendChild(optionElementFilter);
+
+                    const optionElementUpdate = document.createElement("option");
+                    optionElementUpdate.value = producer;
+                    optionElementUpdate.textContent = producer;
+                    selectElementCategoryUpdate.appendChild(optionElementUpdate);
+
+                });
+
+
+            })
+    }
+
+    function getAllStoreHouses() {
+        fetch('http://localhost:8080/storeHouse/getAllStoreHouseNames', {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+
+                data.forEach(producer => {
+                    const optionElement = document.createElement("option");
+                    optionElement.value = producer;
+                    optionElement.textContent = producer;
+                    selectElementSoreHouse.appendChild(optionElement);
+
+                    const optionElementFilter = document.createElement("option");
+                    optionElementFilter.value = producer;
+                    optionElementFilter.textContent = producer;
+                    document.getElementById("store-house-filter").appendChild(optionElementFilter);
+
+                    const optionElementUpdate = document.createElement("option");
+                    optionElementUpdate.value = producer;
+                    optionElementUpdate.textContent = producer;
+                    selectElementSoreHouseUpdate.appendChild(optionElementUpdate);
+                });
+            })
+    }
+
+    function getAllProducers() {
+        fetch('http://localhost:8080/producer/getAllProducersNames', {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+
+                data.forEach(producer => {
+                    const optionElement = document.createElement("option");
+                    optionElement.value = producer;
+                    optionElement.textContent = producer;
+                    selectElementProducer.appendChild(optionElement);
+
+                    const optionElementFilter = document.createElement("option");
+                    optionElementFilter.value = producer;
+                    optionElementFilter.textContent = producer;
+                    document.getElementById("producer-filter").appendChild(optionElementFilter);
+
+                    const optionElementUpdate = document.createElement("option");
+                    optionElementUpdate.value = producer;
+                    optionElementUpdate.textContent = producer;
+                    selectElementProducerUpdate.appendChild(optionElementUpdate);
+                });
+
+
+            })
+    }
+
+
+    async function fetchAutoParts() {
+        try {
+            const response = await fetch('http://localhost:8080/autoProducts/getAllAutoParts', {
+                method: 'GET',
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+            return data.map(item => ({
+                part_id: item.part_id,
+                part_name: item.part_name,
+                part_desc: item.part_desc,
+                part_image: item.part_image,
+                part_producer: item.part_producer,
+                category: item.category,
+                part_price: item.part_price,
+                purchase_price: item.purchase_price,
+                count: item.count,
+                sales: item.sales,
+                storage_house: item.storage_house
+            }));
+        } catch (error) {
+            console.error('Error fetching data from the backend:', error);
+            return [];
+        }
+    }
+
+
+    function displayAutoParts(autoParts) {
+        productsContainer.innerHTML = '';
+        autoParts.forEach(product => {
+            const productsRow = document.createElement('div');
+            productsRow.classList.add('products-row');
+
+            const moreButton = document.createElement('button');
+            moreButton.classList.add('cell-more-button');
+
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '18');
+            svg.setAttribute('height', '18');
+            svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('fill', 'none');
+            svg.setAttribute('stroke', 'currentColor');
+            svg.setAttribute('stroke-width', '2');
+            svg.setAttribute('stroke-linecap', 'round');
+            svg.setAttribute('stroke-linejoin', 'round');
+            svg.classList.add('feather', 'feather-more-vertical');
+
+            const circles = [
+                {cx: 12, cy: 12, r: 1},
+                {cx: 12, cy: 5, r: 1},
+                {cx: 12, cy: 19, r: 1}
+            ];
+
+            circles.forEach(circleData => {
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', circleData.cx);
+                circle.setAttribute('cy', circleData.cy);
+                circle.setAttribute('r', circleData.r);
+                svg.appendChild(circle);
+            });
+
+            moreButton.appendChild(svg);
+            const productCellImage = document.createElement('div');
+            productCellImage.classList.add('product-cell', 'image');
+            const image = document.createElement('img');
+            image.setAttribute('src', 'data:image/jpeg;base64,' + product.part_image);
+            image.setAttribute('alt', 'Fiber product');
+            const span = document.createElement('span');
+            span.textContent = product.part_name;
+            productCellImage.appendChild(image);
+            productCellImage.appendChild(span);
+
+
+            const productCellCategory1 = document.createElement('div');
+            productCellCategory1.classList.add('product-cell', 'category');
+            productCellCategory1.innerHTML = `<span class="cell-label">Category:</span> ${product.category}`;
+
+            const productCellCategory2 = document.createElement('div');
+            productCellCategory2.classList.add('product-cell', 'category');
+            productCellCategory2.innerHTML = `<span class="cell-label">Category:</span> ${product.part_producer}`;
+
+            const productCellStatus = document.createElement('div');
+            productCellStatus.classList.add('product-cell', 'status-cell');
+            if (product.count === 0) {
+                productCellStatus.innerHTML = `<span class="cell-label">Status:</span><span class="status disabled">Out of stock</span>`;
+            } else {
+                productCellStatus.innerHTML = `<span class="cell-label">Status:</span><span class="status active">In Stock</span>`;
+            }
+            const productCellSales = document.createElement('div');
+            productCellSales.classList.add('product-cell', 'sales');
+            productCellSales.innerHTML = `<span class="cell-label">Sales:</span>${product.sales}`;
+            const productCellStock = document.createElement('div');
+            productCellStock.classList.add('product-cell', 'stock');
+            productCellStock.innerHTML = `<span class="cell-label">Count:</span>${product.count}`;
+
+            const productCellPrice1 = document.createElement('div');
+            productCellPrice1.classList.add('product-cell', 'price');
+            productCellPrice1.innerHTML = `<span class="cell-label">Price:</span>$${product.part_price}`;
+
+            const productCellPrice2 = document.createElement('div');
+            productCellPrice2.classList.add('product-cell', 'price');
+            productCellPrice2.innerHTML = `<span class="cell-label">Retail price:</span>$${product.purchase_price}`;
+
+            productsRow.setAttribute('data-bs-toggle', 'modal');
+            productsRow.setAttribute('data-bs-target', '#updateModal');
+            productsRow.addEventListener('click', handleRowClick);
+            productsRow.setAttribute('data-product-id', product.part_id);
+
+            function handleRowClick() {
+                productId = product.part_id
+
+                document.getElementById("name-update").value = product.part_name;
+                //document.getElementById("category-update").selectedItem = product.category;
+                document.getElementById("description-update").value = product.part_desc
+                //document.getElementById("price-update").selectedItem.value = product.part_producer;
+                document.getElementById("price-update").value = product.part_price;
+                document.getElementById("purchase_price-update").value = product.purchase_price;
+                document.getElementById("count-update").value = product.count;
+                // document.getElementById("storage-update").selectedItem = product.storage;
+            }
+
+            productsRow.appendChild(moreButton);
+            productsRow.appendChild(productCellImage);
+            productsRow.appendChild(productCellCategory1);
+            productsRow.appendChild(productCellCategory2);
+            productsRow.appendChild(productCellStatus);
+            productsRow.appendChild(productCellSales);
+            productsRow.appendChild(productCellStock);
+            productsRow.appendChild(productCellPrice1);
+            productsRow.appendChild(productCellPrice2);
+
+            productsContainer.appendChild(productsRow);
+        });
+    }
+
+    getResetButton.addEventListener('click', async () => {
+        document.querySelector('#category-filter').value = "All";
+        document.querySelector('#producer-filter').value = "All";
+        document.querySelector('#store-house-filter').value = "All";
+        document.querySelector('#minPrice').value = "";
+        document.querySelector('#maxPrice').value = "";
+    })
+
+    getFilteredButton.addEventListener('click', async () => {
+        var formData = new FormData();
+
+        formData.append('category', document.getElementById('category-filter').options[document.getElementById('category-filter').selectedIndex].value);
+        formData.append('producer', document.getElementById('producer-filter').options[document.getElementById('producer-filter').selectedIndex].value);
+        formData.append('storage', document.getElementById('store-house-filter').options[document.getElementById('store-house-filter').selectedIndex].value);
+        formData.append('minPrice', document.getElementById('minPrice').value);
+        formData.append('maxPrice', document.getElementById('maxPrice').value);
+        const queryParams = new URLSearchParams(formData).toString();
+
+
+        fetch(`/autoProducts/getFilteredProducts?${queryParams}`, {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+
+        })
+            .then(async response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                data.map(item => ({
+                    part_id: item.part_id,
+                    part_name: item.part_name,
+                    part_desc: item.part_desc,
+                    part_image: item.part_image,
+                    part_producer: item.part_producer,
+                    category: item.category,
+                    part_price: item.part_price,
+                    purchase_price: item.purchase_price,
+                    count: item.count,
+                    sales: item.sales,
+                    storage_house: item.storage_house
+                }));
+                partsList = data;
+                displayAutoParts(data);
+
+            })
+            .catch(error => {
+                console.error('Произошла ошибка при выполнении запроса:', error);
+            });
+
+    });
+
+    addProductButton.addEventListener('click', async () => {
+        var formData = new FormData();
+
+        formData.append('name', document.getElementById('name').value);
+        formData.append('description', document.getElementById('description').value);
+        formData.append('producer', document.getElementById('producer').value);
+        formData.append('price', document.getElementById('price').value);
+        formData.append('purchase_price', document.getElementById('purchase_price').value);
+        formData.append('category', document.getElementById('category').value);
+        formData.append('storage', document.getElementById('storage').value);
+        formData.append('count', document.getElementById('count').value);
+        formData.append('image', document.getElementById('image').files[0]);
+
+        fetch('/autoProducts/addProduct', {
+            method: 'POST',
+            body: formData
+        })
+            .then(async response => {
+
+                if (response.ok) {
+                    console.log('Данные успешно отправлены на сервер');
+                    $('#exampleModal').modal('hide');
+                    const autoParts = await fetchAutoParts();
+                    partsList = autoParts;
+                    displayAutoParts(autoParts);
+                } else {
+                    console.error('Произошла ошибка при отправке данных на сервер');
+                    $('#exampleModal').modal('hide');
+                }
+            })
+            .catch(error => {
+                console.error('Произошла ошибка при выполнении запроса:', error);
+            });
+    });
+
+
+    updatePartButton.addEventListener('click', async () => {
+        var formData = new FormData();
+        formData.append('id', productId);
+        formData.append('name', document.getElementById('name-update').value);
+        formData.append('description', document.getElementById('description-update').value);
+        formData.append('producer', document.getElementById('producer-update').value);
+        formData.append('price', document.getElementById('price-update').value);
+        formData.append('purchase_price', document.getElementById('purchase_price-update').value);
+        formData.append('category', document.getElementById('category-update').value);
+        formData.append('storage', document.getElementById('storage-update').value);
+        formData.append('count', document.getElementById('count-update').value);
+        formData.append('image', document.getElementById('image-update').files[0]);
+
+        fetch('/autoProducts/updateProduct', {
+            method: 'PUT',
+            body: formData
+        })
+            .then(async response => {
+
+                if (response.ok) {
+                    console.log('Данные успешно отправлены на сервер');
+                    $('#exampleModal').modal('hide');
+                    const autoParts = await fetchAutoParts();
+                    partsList = autoParts;
+                    displayAutoParts(autoParts);
+                } else {
+                    console.error('Произошла ошибка при отправке данных на сервер');
+                    $('#exampleModal').modal('hide');
+                }
+            })
+            .catch(error => {
+                console.error('Произошла ошибка при выполнении запроса:', error);
+            });
+    });
+    deletePartButton.addEventListener('click', async () => {
+        var formData = new FormData();
+        formData.append('id', productId);
+        formData.append('name', document.getElementById('name-update').value);
+        formData.append('description', document.getElementById('description-update').value);
+        formData.append('producer', document.getElementById('producer-update').value);
+        formData.append('price', document.getElementById('price-update').value);
+        formData.append('purchase_price', document.getElementById('purchase_price-update').value);
+        formData.append('category', document.getElementById('category-update').value);
+        formData.append('storage', document.getElementById('storage-update').value);
+        formData.append('count', document.getElementById('count-update').value);
+        formData.append('image', document.getElementById('image-update').files[0]);
+
+        fetch(`/autoProducts/deleteProduct?productId=${productId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+
+            },
+        })
+            .then(async response => {
+
+                if (response.ok) {
+                    $('#exampleModal').modal('hide');
+                    const autoParts = await fetchAutoParts();
+                    partsList = autoParts;
+                    displayAutoParts(autoParts);
+                    console.log('Данные успешно отправлены на сервер');
+                } else {
+                    $('#exampleModal').modal('hide');
+                    console.error('Произошла ошибка при отправке данных на сервер');
+                }
+            })
+            .catch(error => {
+                console.error('Произошла ошибка при выполнении запроса:', error);
+            });
+    });
+
+    document.addEventListener("DOMContentLoaded", async function () {
+        getAllProducers();
+        getAllCategories();
+        getAllStoreHouses()
+        const autoParts = await fetchAutoParts();
+        partsList = autoParts;
+        displayAutoParts(autoParts);
+    });
+
+
+</script>
+</body>

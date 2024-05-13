@@ -1,0 +1,595 @@
+<head xmlns="http://www.w3.org/1999/html">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">New client</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <textarea class="form-control" id="name"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="surname" class="col-form-label">Surname:</label>
+                        <textarea class="form-control" id="surname"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="col-form-label">Address:</label>
+                        <textarea class="form-control" id="address"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="col-form-label">Email:</label>
+                        <textarea class="form-control" id="email"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="col-form-label">Phone:</label>
+                        <textarea class="form-control" id="phone"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="add-client-button">Add client</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="updateModalLabel">New client</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <textarea class="form-control" id="name-update"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="surname" class="col-form-label">Surname:</label>
+                        <textarea class="form-control" id="surname-update"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="col-form-label">Address:</label>
+                        <textarea class="form-control" id="address-update"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="col-form-label">Email:</label>
+                        <textarea class="form-control" id="email-update"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="col-form-label">Phone:</label>
+                        <textarea class="form-control" id="phone-update"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="delete-client-button">Delete client</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="update-client-button">Update client</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="app container-custom">
+    <div class="sidebar">
+        <div class="app-icon">
+            <div class="logo">
+                <img src="images/logo.jpg" alt="Company Logo">
+                <h1>Auto parts</h1>
+            </div>
+        </div>
+        <ul class="sidebar-list">
+
+            <li class="sidebar-list-item">
+                <a href="index.html">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                    <span>Parts</span>
+                </a>
+            </li>
+            <li class="sidebar-list-item">
+                <a href="statistic.html">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart">
+                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
+                        <path d="M22 12A10 10 0 0 0 12 2v10z"/>
+                    </svg>
+                    <span>Statistics</span>
+                </a>
+            </li>
+            <li class="sidebar-list-item active">
+                <a href="#">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                        <path d="M12 2c2.21 0 4 2.24 4 5s-1.79 5-4 5-4-2.24-4-5 1.79-5 4-5zm0 10c2.67 0 8 1.34 8 4v2H4v-2c0-2.66 5.33-4 8-4z"/>
+                    </svg>
+
+                    <span>Clients</span>
+                </a>
+            </li>
+
+            <li class="sidebar-list-item">
+                <a href="orders.html">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="5.5" cy="7.5" r="1.5"></circle>
+                        <circle cx="5.5" cy="12" r="1.5"></circle>
+                        <circle cx="5.5" cy="16.5" r="1.5"></circle>
+                    </svg>
+                    <span>Orders</span>
+                </a>
+            </li>
+
+        </ul>
+        <div class="account-info">
+            <div class="account-info-picture">
+                <div class="status-dot"></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="app-content">
+        <div class="app-content-header">
+
+            <h1 class="app-content-headerText">Clients</h1>
+
+            <button class="mode-switch" title="Switch Theme">
+                <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                     stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
+                    <defs></defs>
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                </svg>
+            </button>
+
+            <button class="app-content-headerButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add client
+            </button>
+
+        </div>
+
+        <div class="app-content-actions">
+            <input class="search-bar" id="search-input-client" placeholder="Search..." type="text">
+        </div>
+        <div class="products-area-wrapper tableView">
+            <div class="products-header">
+
+                <div class="product-cell category">Name
+                    <button class="sort-button">
+                        <svg width="16" height="16" viewBox="0 0 512 512" id = "sort-name">
+                            <path fill="currentColor"
+                                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="product-cell category">Surname
+                    <button class="sort-button">
+                        <svg width="16" height="16" viewBox="0 0 512 512" id = "sort-surname">
+                            <path fill="currentColor"
+                                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="product-cell status-cell">Address
+                    <button class="sort-button">
+                        <svg width="16" height="16" viewBox="0 0 512 512"id = "sort-address">
+                            <path fill="currentColor"
+                                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="product-cell sales">Email
+                    <button class="sort-button">
+                        <svg width="16" height="16" viewBox="0 0 512 512" id = "sort-email">
+                            <path fill="currentColor"
+                                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="product-cell stock">Phone
+                    <button class="sort-button">
+                        <svg width="16" height="16" viewBox="0 0 512 512" id = "sort-phone">
+                            <path fill="currentColor"
+                                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="product-cell stock">Order quantity
+                    <button class="sort-button">
+                        <svg width="16" height="16" viewBox="0 0 512 512" id = "sort-order-quantity">
+                            <path fill="currentColor"
+                                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="clients">
+                <div class="products-row">
+                    <button class="cell-more-button">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                            <circle cx="12" cy="12" r="1" />
+                            <circle cx="12" cy="5" r="1" />
+                            <circle cx="12" cy="19" r="1" />
+                        </svg>
+                    </button>
+                    <div class="product-cell image">
+                        <span>42412</span>
+                    </div>
+                    <div class="product-cell category"><span class="cell-label"></span>Andriy</div>
+                    <div class="product-cell status-cell">
+                        <span class="cell-label"></span>
+                        <span class="status in-processing">in processing</span>
+                    </div>
+                    <div class="product-cell sales"><span class="cell-label"></span>100$</div>
+                    <div class="product-cell stock"><span class="cell-label"></span>09.05.2024</div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<canvas id="salesChart" width="800" height="400"></canvas>
+<script>
+
+
+
+
+
+
+
+
+
+
+
+
+    let clientList
+    let clientId;
+    const deleteClient = document.getElementById("delete-client-button");
+    const updateClient = document.getElementById("update-client-button");
+
+
+
+
+    function filterProductsByName(searchTerm) {
+        return clientList.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    }
+    document.getElementById("search-input-client").addEventListener("input", function (event) {
+        const searchTerm = event.target.value.trim();
+        const filteredClients = filterProductsByName(searchTerm);
+        displayClients(filteredClients);
+    });
+
+
+    function sortProducts(field) {
+        const sortOrder = field.startsWith('desc') ? -1 : 1;
+        const fieldName = field.replace('desc-', '');
+
+        return function (a, b) {
+            let valueA = a[fieldName];
+            let valueB = b[fieldName];
+
+            // If the field is numeric, convert values to numbers for comparison
+            if (!isNaN(valueA) && !isNaN(valueB)) {
+                valueA = parseFloat(valueA);
+                valueB = parseFloat(valueB);
+            }
+
+            if (valueA < valueB) {
+                return -1 * sortOrder;
+            }
+            if (valueA > valueB) {
+                return 1 * sortOrder;
+            }
+            return 0;
+        };
+    }
+
+    document.getElementById("sort-name").addEventListener("click", async function () {
+        const sortedProducts = clientList.slice().sort(sortProducts('name'));
+        displayClients(sortedProducts);
+    });
+    document.getElementById("sort-surname").addEventListener("click", async function () {
+        const sortedProducts = clientList.slice().sort(sortProducts('surname'));
+        displayClients(sortedProducts);
+    });
+    document.getElementById("sort-address").addEventListener("click", async function () {
+        const sortedProducts = clientList.slice().sort(sortProducts('address'));
+        displayClients(sortedProducts);
+    });
+    document.getElementById("sort-email").addEventListener("click", async function () {
+        const sortedProducts = clientList.slice().sort(sortProducts('email'));
+        displayClients(sortedProducts);
+    });
+    document.getElementById("sort-phone").addEventListener("click", async function () {
+        const sortedProducts = clientList.slice().sort(sortProducts('phone'));
+        displayClients(sortedProducts);
+    });
+    document.getElementById("sort-order-quantity").addEventListener("click", async function () {
+        const sortedProducts = clientList.slice().sort(sortProducts('order_quantity'));
+        displayClients(sortedProducts);
+    });
+
+
+
+
+    updateClient.addEventListener('click', async () => {
+        var formData = new FormData();
+        formData.append('id', clientId);
+        formData.append('name', document.getElementById('name-update').value);
+        formData.append('surname', document.getElementById('surname-update').value);
+        formData.append('address', document.getElementById('address-update').value);
+        formData.append('email', document.getElementById('email-update').value);
+        formData.append('phone', document.getElementById('phone-update').value);
+
+
+        fetch('/clients/updateClient', {
+            method: 'PUT',
+            body: formData
+        })
+            .then(async response => {
+
+                if (response.ok) {
+                    console.log('Данные успешно отправлены на сервер');
+                    $('#updateModal').modal('hide');
+                    const autoParts = await fetchClients();
+                    clientList = autoParts;
+                    displayClients(autoParts);
+                } else {
+                    console.error('Произошла ошибка при отправке данных на сервер');
+                    $('#updateModal').modal('hide');
+                }
+            })
+            .catch(error => {
+                console.error('Произошла ошибка при выполнении запроса:', error);
+            });
+    });
+
+    deleteClient.addEventListener('click', async () => {
+        var formData = new FormData();
+        formData.append('id', clientId);
+
+        fetch(`/clients/deleteClient?clientId=${clientId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+
+            },
+        })
+            .then(async response => {
+
+                if (response.ok) {
+                    $('#updateModal').modal('hide');
+                    const autoParts = await fetchClients();
+                    clientList = autoParts;
+                    displayClients(autoParts);
+                    console.log('Данные успешно отправлены на сервер');
+                } else {
+                    $('#updateModal').modal('hide');
+                    console.error('Произошла ошибка при отправке данных на сервер');
+                }
+            })
+            .catch(error => {
+                console.error('Произошла ошибка при выполнении запроса:', error);
+            });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const productsContainer = document.getElementById("clients");
+    async function fetchClients() {
+        try {
+            const response = await fetch('http://localhost:8080/clients/getAllClients', {
+                method: 'GET',
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+            return data.map(item => ({
+                id: item.id,
+                name: item.name,
+                surname: item.surname,
+                address: item.address,
+                email: item.email,
+                phone: item.phone,
+                order_quantity: item.order_quantity,
+            }));
+        } catch (error) {
+            console.error('Error fetching data from the backend:', error);
+            return [];
+        }
+    }
+    function displayClients(autoParts) {
+        productsContainer.innerHTML = '';
+        autoParts.forEach(product => {
+            const productsRow = document.createElement('div');
+            productsRow.classList.add('products-row');
+
+            const moreButton = document.createElement('button');
+            moreButton.classList.add('cell-more-button');
+
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '18');
+            svg.setAttribute('height', '18');
+            svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('fill', 'none');
+            svg.setAttribute('stroke', 'currentColor');
+            svg.setAttribute('stroke-width', '2');
+            svg.setAttribute('stroke-linecap', 'round');
+            svg.setAttribute('stroke-linejoin', 'round');
+            svg.classList.add('feather', 'feather-more-vertical');
+
+            const circles = [
+                {cx: 12, cy: 12, r: 1},
+                {cx: 12, cy: 5, r: 1},
+                {cx: 12, cy: 19, r: 1}
+            ];
+
+            circles.forEach(circleData => {
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', circleData.cx);
+                circle.setAttribute('cy', circleData.cy);
+                circle.setAttribute('r', circleData.r);
+                svg.appendChild(circle);
+            });
+
+            moreButton.appendChild(svg);
+            const span = document.createElement('span');
+            span.textContent = product.part_name;
+
+
+            const productCellCategory1 = document.createElement('div');
+            productCellCategory1.classList.add('product-cell', 'category');
+            productCellCategory1.innerHTML = `<span class="cell-label"></span> ${product.name}`;
+
+            const productCellCategory2 = document.createElement('div');
+            productCellCategory2.classList.add('product-cell', 'category');
+            productCellCategory2.innerHTML = `<span class="cell-label"></span> ${product.surname}`;
+
+            const productCellSales = document.createElement('div');
+            productCellSales.classList.add('product-cell', 'sales');
+            productCellSales.innerHTML = `<span class="cell-label"></span>${product.address}`;
+
+            const productCellStock = document.createElement('div');
+            productCellStock.classList.add('product-cell', 'stock');
+            productCellStock.innerHTML = `<span class="cell-label"></span>${product.email}`;
+
+            const productCellPrice1 = document.createElement('div');
+            productCellPrice1.classList.add('product-cell', 'price');
+            productCellPrice1.innerHTML = `<span class="cell-label"></span>${product.phone}`;
+
+            const productCellPrice2 = document.createElement('div');
+            productCellPrice2.classList.add('product-cell', 'price');
+            productCellPrice2.innerHTML = `<span class="cell-label"></span>${product.order_quantity}`;
+
+
+            productsRow.setAttribute('data-bs-toggle', 'modal');
+            productsRow.setAttribute('data-bs-target', '#updateModal');
+            productsRow.addEventListener('click', handleRowClick);
+            productsRow.setAttribute('data-product-id', product.id);
+
+
+            function handleRowClick() {
+                clientId = product.id
+                document.getElementById("name-update").value = product.name;
+                document.getElementById("surname-update").value = product.surname
+                document.getElementById("phone-update").value = product.phone;
+                document.getElementById("address-update").value = product.address;
+                document.getElementById("email-update").value = product.email;
+            }
+
+            productsRow.appendChild(moreButton);
+            productsRow.appendChild(span);
+            productsRow.appendChild(productCellCategory1);
+            productsRow.appendChild(productCellCategory2);
+            productsRow.appendChild(productCellSales);
+            productsRow.appendChild(productCellStock);
+            productsRow.appendChild(productCellPrice1);
+            productsRow.appendChild(productCellPrice2);
+
+            productsContainer.appendChild(productsRow);
+        });
+
+    }
+    document.getElementById("add-client-button").addEventListener('click', async () => {
+        var formData = new FormData();
+
+        formData.append('name', document.getElementById('name').value);
+        formData.append('surname', document.getElementById('surname').value);
+        formData.append('address', document.getElementById('address').value);
+        formData.append('email', document.getElementById('email').value);
+        formData.append('phone', document.getElementById('phone').value);
+
+        fetch('/clients/addClient', {
+            method: 'POST',
+            body: formData
+        })
+            .then(async response => {
+
+                if (response.ok) {
+                    console.log('Данные успешно отправлены на сервер');
+                    $('#exampleModal').modal('hide');
+                    const clients = await fetchClients();
+                    clientList = clients;
+                    displayClients(clients);
+                } else {
+                    console.error('Произошла ошибка при отправке данных на сервер');
+                    $('#exampleModal').modal('hide');
+                }
+            })
+            .catch(error => {
+                console.error('Произошла ошибка при выполнении запроса:', error);
+            });
+    });
+    document.addEventListener("DOMContentLoaded", async function () {
+        const clients = await fetchClients();
+        clientList = clients;
+        displayClients(clients);
+    });
+
+
+</script>
+</body>
